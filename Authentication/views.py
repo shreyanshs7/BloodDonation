@@ -8,6 +8,7 @@ from django.contrib.auth.models import User
 from Helpers.utils import assert_found, assert_true
 from Authentication.models import Hospital, UserDetail
 from Helpers.serializers import get_model_json
+from BloodBank.models import BLOOD_GROUP, BloodBankStock
 
 # Create your views here.
 @require_http_methods(['POST'])
@@ -45,6 +46,10 @@ def hospital_register(request):
     hospital_obj = Hospital.objects.create(username = hospital_user_obj, name = name, state = state, city = city, address = address, contact = contact)
     hospital_obj.save()
 
+    for a,b in BLOOD_GROUP:
+        blood_bank_obj = BloodBankStock.objects.create(hospital = hospital_obj, blood_group = b)
+        blood_bank_obj.save()
+    
     response = {}
     response['success'] = False
     reponse['data'] = get_model_json(hospital_obj)
