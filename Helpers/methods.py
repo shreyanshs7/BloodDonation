@@ -1,4 +1,5 @@
 from functools import wraps
+from django.http import JsonResponse
 
 def respond(reponse):
     return JsonResponse(reponse, safe=False)

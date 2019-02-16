@@ -30,9 +30,18 @@ def donor_list(request):
     donors = Donor.objects.all()
     donors_list = []
     for obj in donors:
-        temp = get_model_json(obj)
-        donor_list.append(temp)
+        temp = {}
+        temp['donor_id'] = obj.id
+        temp['full_name'] = obj.user.full_name
+        temp['blood_group'] = obj.user.blood_group
+        temp['gender'] = obj.user.gender
+        temp['city'] = obj.user.city
+        temp['state'] = obj.user.state
+        temp['address'] = obj.user.address
+        temp['contact'] = obj.user.contact
+        temp['weight'] = obj.user.weight
+        donors_list.append(temp)
     response = {}
-    respond['success'] = True
+    response['success'] = True
     response['data'] = donors_list
-    return respond(reponse)
+    return respond(response)
