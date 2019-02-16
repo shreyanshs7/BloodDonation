@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from Helpers.methods import respond
-from django.contrib.auth.models
+from django.contrib.auth.models import User
 from Helpers.methods import get_or_none
 from Helpers.tokens import token_required, generate_token
 from django.views.decorators.http import require_http_methods

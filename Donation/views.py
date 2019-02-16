@@ -28,7 +28,7 @@ def donation_request(request):
 @require_http_methods(['GET'])
 def donor_list(request):
     donors = Donor.objects.all()
-    donors_list []
+    donors_list = []
     for obj in donors:
         temp = get_model_json(obj)
         donor_list.append(temp)

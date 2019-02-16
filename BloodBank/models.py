@@ -26,8 +26,6 @@ class BloodBankStock(models.Model):
     hospital = models.ForeignKey(Hospital, on_delete = models.CASCADE)
     blood_group = models.CharField(max_length = 120, choices = BLOOD_GROUP)
     units_of_blood = models.IntegerField(default = 0)
-    latitude = models.CharField(max_length = 20, default = "0")
-    longitude = models.CharField(max_length = 20, default = "0")
     created_at = models.DateTimeField(auto_now=False, auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True, auto_now_add=False)
 
