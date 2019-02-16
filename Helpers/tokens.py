@@ -3,18 +3,19 @@ import datetime
 from Helpers.utils import assert_found, assert_valid
 from functools import wraps
 from BloodDonation.settings import SECRET_KEY
+from Helpers.serializers import get_model_json
 
 def token_required(func):
     @wraps(func)
     def decorator(request, *args, **kwargs):
-        token = request.META.get("TOKEN", None)
+        token = request.META.get("HTTP_AUTHORIZATION", None)
         assert_found(token, "Access token not found")
         return func(request, *args, **kwargs)
     return decorator
 
 
 def generate_token(user):
-    data = { 'user': user }
+    data = { 'user': get_model_json(user) }
     return jwt.encode(data, SECRET_KEY, algorithm='HS256')
 
 def get_token_data(token):
