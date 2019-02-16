@@ -15,10 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from Authentication.views import user_hospital_login, hospital_register
+from Authentication.views import user_hospital_login, hospital_register, user_register
+from Donation.views import donation_request, donor_list
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('hospital/login', user_hospital_login),
-    path('hospital/register', hospital_register)
+    path('hospital/register', hospital_register),
+    path('user/register', user_register),
+    path('donor/request', donation_request),
+    path('donor/list', donor_list),
 ]

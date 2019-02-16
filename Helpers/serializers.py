@@ -2,20 +2,20 @@ import datetime
 from django.db.models import Model
 
 def get_model_json(instance):
-    data = []
+    data = {}
     fields = get_model_fields(instance)
     model_properties = get_model_properties(instance.__class__)
     if model_properties is not None:
         fields = fields + model_properties
     for field in fields:
-        temp = {}
+        # temp = {}
         value = getattr(instance, field, None)
         if isinstance(value, datetime.datetime):
             value = str(value)
         if isinstance(value, Model):
             value = get_model_json(value)
-        temp[field] = value
-        data.append(temp)
+        data[field] = value
+        # data.append(temp)
     return data
 
 def get_model_fields(instance):
